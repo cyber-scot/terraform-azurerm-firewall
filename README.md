@@ -157,11 +157,13 @@ No modules.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_firewall_data_public_ip_address"></a> [firewall\_data\_public\_ip\_address](#output\_firewall\_data\_public\_ip\_address) | The address of the firewall public IP. |
 | <a name="output_firewall_data_public_ip_fqdn"></a> [firewall\_data\_public\_ip\_fqdn](#output\_firewall\_data\_public\_ip\_fqdn) | The Fully Qualified Domain Name (FQDN) of the firewall public IP. |
 | <a name="output_firewall_data_public_ip_id"></a> [firewall\_data\_public\_ip\_id](#output\_firewall\_data\_public\_ip\_id) | The ID of the firewall public IP. |
 | <a name="output_firewall_id"></a> [firewall\_id](#output\_firewall\_id) | The ID of the firewall. |
 | <a name="output_firewall_ip_configuration"></a> [firewall\_ip\_configuration](#output\_firewall\_ip\_configuration) | The IP configuration of the firewall. |
 | <a name="output_firewall_management_ip_configuration"></a> [firewall\_management\_ip\_configuration](#output\_firewall\_management\_ip\_configuration) | The management IP configuration of the firewall. |
+| <a name="output_firewall_management_public_ip_address"></a> [firewall\_management\_public\_ip\_address](#output\_firewall\_management\_public\_ip\_address) | The address of the firewall public IP. |
 | <a name="output_firewall_management_public_ip_fqdn"></a> [firewall\_management\_public\_ip\_fqdn](#output\_firewall\_management\_public\_ip\_fqdn) | The Fully Qualified Domain Name (FQDN) of the firewall public IP. |
 | <a name="output_firewall_management_public_ip_id"></a> [firewall\_management\_public\_ip\_id](#output\_firewall\_management\_public\_ip\_id) | The ID of the firewall public IP. |
 | <a name="output_firewall_management_subnet_id"></a> [firewall\_management\_subnet\_id](#output\_firewall\_management\_subnet\_id) | The ID of the management firewall subnet. |

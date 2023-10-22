@@ -1,3 +1,8 @@
+output "firewall_data_public_ip_address" {
+  description = "The address of the firewall public IP."
+  value       = azurerm_public_ip.firewall_data_pip[0].ip_address
+}
+
 output "firewall_data_public_ip_fqdn" {
   description = "The Fully Qualified Domain Name (FQDN) of the firewall public IP."
   value       = azurerm_public_ip.firewall_data_pip[0].fqdn
@@ -21,6 +26,11 @@ output "firewall_ip_configuration" {
 output "firewall_management_ip_configuration" {
   description = "The management IP configuration of the firewall."
   value       = azurerm_firewall.firewall.management_ip_configuration
+}
+
+output "firewall_management_public_ip_address" {
+  description = "The address of the firewall public IP."
+  value       = azurerm_public_ip.firewall_management_pip[0].ip_address
 }
 
 output "firewall_management_public_ip_fqdn" {
