@@ -18,14 +18,24 @@ output "firewall_name" {
   value       = azurerm_firewall.firewall.name
 }
 
-output "firewall_public_ip_fqdn" {
+output "firewall_data_public_ip_fqdn" {
   description = "The Fully Qualified Domain Name (FQDN) of the firewall public IP."
-  value       = azurerm_public_ip.firewall_pip[0].fqdn
+  value       = azurerm_public_ip.firewall_data_pip[0].fqdn
 }
 
-output "firewall_public_ip_id" {
+output "firewall_data_public_ip_id" {
   description = "The ID of the firewall public IP."
-  value       = azurerm_public_ip.firewall_pip[0].id
+  value       = azurerm_public_ip.firewall_data_pip[0].id
+}
+
+output "firewall_management_public_ip_fqdn" {
+  description = "The Fully Qualified Domain Name (FQDN) of the firewall public IP."
+  value       = azurerm_public_ip.firewall_management_pip[0].fqdn
+}
+
+output "firewall_management_public_ip_id" {
+  description = "The ID of the firewall public IP."
+  value       = azurerm_public_ip.firewall_management_pip[0].id
 }
 
 output "firewall_subnet_id" {

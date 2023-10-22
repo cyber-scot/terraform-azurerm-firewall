@@ -19,14 +19,14 @@ module "network" {
 
   subnets = {
     "sn1-${module.network.vnet_name}" = {
-      address_prefixes  = ["10.0.1.0/24"]
+      address_prefixes  = ["10.0.3.0/24"]
       service_endpoints = ["Microsoft.Storage"]
     }
   }
 }
 
 module "firewall" {
-  source = "cyber-scot/firewall/azurerm"
+  source = "../../"
 
   rg_name  = module.rg.rg_name
   location = module.rg.rg_location
@@ -34,9 +34,16 @@ module "firewall" {
 
   name = "fw-${var.short}-${var.loc}-${var.env}-01"
 
-  create_firewall_subnet   = true
-  vnet_name                = module.network.vnet_name
-  firewall_subnet_prefixes = ["10.0.0.0/24"]
+  create_firewall_subnet               = true
+  create_firewall_management_subnet    = true
+  create_firewall_management_public_ip = true
+  create_firewall_data_public_ip       = true
+  vnet_rg_name                         = module.network.vnet_rg_name
+  vnet_name                            = module.network.vnet_name
 
+  firewall_subnet_prefixes            = ["10.0.0.0/24"]
+  firewall_management_subnet_prefixes = ["10.0.1.0/24"]
+
+  ip_configuration            = {} # Use module inherited values
   management_ip_configuration = {} # Use module inherited values
 }
