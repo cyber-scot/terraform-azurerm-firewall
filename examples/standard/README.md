@@ -44,60 +44,12 @@ module "firewall" {
   vnet_name                            = module.network.vnet_name
 
   firewall_subnet_prefixes            = ["10.0.0.0/26"]
-  firewall_management_subnet_prefixes = ["10.0.0.64/26"] #Minimum /26
+  firewall_management_subnet_prefixes = ["10.0.0.64/26"] # Minimum /26
 
   ip_configuration            = {} # Use module inherited values
-  management_ip_configuration = {} # Use module inherited values
+  management_ip_configuration = {} # Enables force tunnel mode
 }
 
-
-module "data_nsg" {
-  source = "cyber-scot/nsg/azurerm"
-
-  rg_name  = module.rg.rg_name
-  location = module.rg.rg_location
-  tags     = module.rg.rg_tags
-
-  nsg_name              = "nsg-fw-mgmt-${var.short}-${var.loc}-${var.env}-01"
-  associate_with_subnet = true
-  subnet_id             = module.firewall.firewall_subnet_id
-  custom_nsg_rules = {
-    "AllowVnetInbound" = {
-      priority                   = 100
-      direction                  = "Inbound"
-      access                     = "Allow"
-      protocol                   = "Tcp"
-      source_port_range          = "*"
-      destination_port_range     = "*"
-      source_address_prefix      = "VirtualNetwork"
-      destination_address_prefix = "VirtualNetwork"
-    }
-  }
-}
-
-module "mgmt_nsg" {
-  source = "cyber-scot/nsg/azurerm"
-
-  rg_name  = module.rg.rg_name
-  location = module.rg.rg_location
-  tags     = module.rg.rg_tags
-
-  nsg_name              = "nsg-fw-data-${var.short}-${var.loc}-${var.env}-01"
-  associate_with_subnet = true
-  subnet_id             = module.firewall.firewall_management_subnet_id
-  custom_nsg_rules = {
-    "AllowVnetInbound" = {
-      priority                   = 100
-      direction                  = "Inbound"
-      access                     = "Allow"
-      protocol                   = "Tcp"
-      source_port_range          = "*"
-      destination_port_range     = "*"
-      source_address_prefix      = "VirtualNetwork"
-      destination_address_prefix = "VirtualNetwork"
-    }
-  }
-}
 ```
 ## Requirements
 
@@ -115,9 +67,7 @@ No requirements.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_data_nsg"></a> [data\_nsg](#module\_data\_nsg) | cyber-scot/nsg/azurerm | n/a |
 | <a name="module_firewall"></a> [firewall](#module\_firewall) | cyber-scot/firewall/azurerm | n/a |
-| <a name="module_mgmt_nsg"></a> [mgmt\_nsg](#module\_mgmt\_nsg) | cyber-scot/nsg/azurerm | n/a |
 | <a name="module_network"></a> [network](#module\_network) | cyber-scot/network/azurerm | n/a |
 | <a name="module_rg"></a> [rg](#module\_rg) | cyber-scot/rg/azurerm | n/a |
 
