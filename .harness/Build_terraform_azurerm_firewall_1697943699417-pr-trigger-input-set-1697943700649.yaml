@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_terraform_azurerm_firewall_1697943699417-pr-trigger-input-set
+  identifier: Build_terraform_azurerm_firewall_1697943699417prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_terraform_azurerm_firewall_1697943699417
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
