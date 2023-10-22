@@ -26,7 +26,7 @@ module "network" {
 }
 
 module "firewall" {
-  source = "../../"
+  source = "cyber-scot/firewall/azurerm"
 
   rg_name  = module.rg.rg_name
   location = module.rg.rg_location
@@ -38,5 +38,5 @@ module "firewall" {
   vnet_name                = module.network.vnet_name
   firewall_subnet_prefixes = ["10.0.0.0/24"]
 
-  management_ip_configuration = {}
+  management_ip_configuration = {} # Use module inherited values
 }

@@ -28,19 +28,19 @@ module "network" {
 }
 
 module "firewall" {
-  source  = "../../"
+  source = "cyber-scot/firewall/azurerm"
 
-    rg_name                 = module.rg.rg_name
-    location                = module.rg.rg_location
-    tags                    = module.rg.rg_tags
+  rg_name  = module.rg.rg_name
+  location = module.rg.rg_location
+  tags     = module.rg.rg_tags
 
-    name = "fw-${var.short}-${var.loc}-${var.env}-01"
+  name = "fw-${var.short}-${var.loc}-${var.env}-01"
 
-  create_firewall_subnet     = true
-    vnet_name                  = module.network.vnet_name
-    firewall_subnet_prefixes   = ["10.0.0.0/24"]
+  create_firewall_subnet   = true
+  vnet_name                = module.network.vnet_name
+  firewall_subnet_prefixes = ["10.0.0.0/24"]
 
-    management_ip_configuration = {}
+  management_ip_configuration = {} # Use module inherited values
 }
 ```
 ## Requirements
@@ -59,7 +59,7 @@ No requirements.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_firewall"></a> [firewall](#module\_firewall) | ../../ | n/a |
+| <a name="module_firewall"></a> [firewall](#module\_firewall) | cyber-scot/firewall/azurerm | n/a |
 | <a name="module_network"></a> [network](#module\_network) | cyber-scot/network/azurerm | n/a |
 | <a name="module_rg"></a> [rg](#module\_rg) | cyber-scot/rg/azurerm | n/a |
 
