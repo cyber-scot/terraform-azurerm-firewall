@@ -166,5 +166,7 @@ No modules.
 | <a name="output_firewall_management_public_ip_id"></a> [firewall\_management\_public\_ip\_id](#output\_firewall\_management\_public\_ip\_id) | The ID of the firewall public IP. |
 | <a name="output_firewall_management_subnet_id"></a> [firewall\_management\_subnet\_id](#output\_firewall\_management\_subnet\_id) | The ID of the management firewall subnet. |
 | <a name="output_firewall_name"></a> [firewall\_name](#output\_firewall\_name) | The name of the firewall. |
+| <a name="output_firewall_rg_name"></a> [firewall\_rg\_name](#output\_firewall\_rg\_name) | The resource group name of the firewall. |
 | <a name="output_firewall_subnet_id"></a> [firewall\_subnet\_id](#output\_firewall\_subnet\_id) | The ID of the firewall subnet. |
+| <a name="output_firewall_tags"></a> [firewall\_tags](#output\_firewall\_tags) | The tags of the firewall. |
 | <a name="output_firewall_virtual_hub_configuration"></a> [firewall\_virtual\_hub\_configuration](#output\_firewall\_virtual\_hub\_configuration) | The virtual hub configuration of the firewall. |

@@ -47,4 +47,3 @@ module "firewall" {
   ip_configuration            = {} # Use module inherited values
   management_ip_configuration = {} # Enables force tunnel mode
 }
-
