@@ -43,6 +43,11 @@ output "firewall_subnet_id" {
   value       = azurerm_subnet.firewall_subnet[0].id
 }
 
+output "firewall_management_subnet_id" {
+  description = "The ID of the management firewall subnet."
+  value       = azurerm_subnet.firewall_management_subnet[0].id
+}
+
 output "firewall_virtual_hub_configuration" {
   description = "The virtual hub configuration of the firewall."
   value       = azurerm_firewall.firewall.virtual_hub

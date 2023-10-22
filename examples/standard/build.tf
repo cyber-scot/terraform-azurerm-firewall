@@ -26,7 +26,7 @@ module "network" {
 }
 
 module "firewall" {
-  source = "../../"
+  source = "cyber-scot/firewall/azurerm"
 
   rg_name  = module.rg.rg_name
   location = module.rg.rg_location
@@ -41,9 +41,58 @@ module "firewall" {
   vnet_rg_name                         = module.network.vnet_rg_name
   vnet_name                            = module.network.vnet_name
 
-  firewall_subnet_prefixes            = ["10.0.0.0/24"]
-  firewall_management_subnet_prefixes = ["10.0.1.0/24"]
+  firewall_subnet_prefixes            = ["10.0.0.0/26"]
+  firewall_management_subnet_prefixes = ["10.0.0.64/26"] #Minimum /26
 
   ip_configuration            = {} # Use module inherited values
   management_ip_configuration = {} # Use module inherited values
+}
+
+
+module "data_nsg" {
+  source = "cyber-scot/nsg/azurerm"
+
+  rg_name  = module.rg.rg_name
+  location = module.rg.rg_location
+  tags     = module.rg.rg_tags
+
+  nsg_name              = "nsg-fw-mgmt-${var.short}-${var.loc}-${var.env}-01"
+  associate_with_subnet = true
+  subnet_id             = module.firewall.firewall_subnet_id
+  custom_nsg_rules = {
+    "AllowVnetInbound" = {
+      priority                   = 100
+      direction                  = "Inbound"
+      access                     = "Allow"
+      protocol                   = "Tcp"
+      source_port_range          = "*"
+      destination_port_range     = "*"
+      source_address_prefix      = "VirtualNetwork"
+      destination_address_prefix = "VirtualNetwork"
+    }
+  }
+}
+
+module "mgmt_nsg" {
+  source = "cyber-scot/nsg/azurerm"
+
+  rg_name  = module.rg.rg_name
+  location = module.rg.rg_location
+  tags     = module.rg.rg_tags
+
+  nsg_name              = "nsg-fw-data-${var.short}-${var.loc}-${var.env}-01"
+  associate_with_subnet = true
+  subnet_id             = module.firewall.firewall_management_subnet_id
+  custom_nsg_rules = {
+    "AllowVnetInbound" = {
+      priority                   = 100
+      direction                  = "Inbound"
+      access                     = "Allow"
+      protocol                   = "Tcp"
+      source_port_range          = "*"
+      destination_port_range     = "*"
+      source_address_prefix      = "VirtualNetwork"
+      destination_address_prefix = "VirtualNetwork"
+    }
+  }
 }

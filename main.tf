@@ -57,6 +57,7 @@ resource "azurerm_firewall" "firewall" {
   private_ip_ranges   = var.firewall_snat_addresses
   threat_intel_mode   = title(var.firewall_threat_intel_mode)
   zones               = toset(var.firewall_availability_zones)
+  tags                = var.tags
 
   dynamic "ip_configuration" {
     for_each = var.ip_configuration != null ? [var.ip_configuration] : []
