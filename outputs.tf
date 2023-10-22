@@ -33,6 +33,11 @@ output "firewall_management_public_ip_id" {
   value       = azurerm_public_ip.firewall_management_pip[0].id
 }
 
+output "firewall_management_subnet_id" {
+  description = "The ID of the management firewall subnet."
+  value       = azurerm_subnet.firewall_management_subnet[0].id
+}
+
 output "firewall_name" {
   description = "The name of the firewall."
   value       = azurerm_firewall.firewall.name
@@ -41,11 +46,6 @@ output "firewall_name" {
 output "firewall_subnet_id" {
   description = "The ID of the firewall subnet."
   value       = azurerm_subnet.firewall_subnet[0].id
-}
-
-output "firewall_management_subnet_id" {
-  description = "The ID of the management firewall subnet."
-  value       = azurerm_subnet.firewall_management_subnet[0].id
 }
 
 output "firewall_virtual_hub_configuration" {

@@ -59,6 +59,7 @@ resource "azurerm_firewall" "firewall" {
   private_ip_ranges   = var.firewall_snat_addresses
   threat_intel_mode   = title(var.firewall_threat_intel_mode)
   zones               = toset(var.firewall_availability_zones)
+  tags                = var.tags
 
   dynamic "ip_configuration" {
     for_each = var.ip_configuration != null ? [var.ip_configuration] : []
@@ -163,6 +164,7 @@ No modules.
 | <a name="output_firewall_management_ip_configuration"></a> [firewall\_management\_ip\_configuration](#output\_firewall\_management\_ip\_configuration) | The management IP configuration of the firewall. |
 | <a name="output_firewall_management_public_ip_fqdn"></a> [firewall\_management\_public\_ip\_fqdn](#output\_firewall\_management\_public\_ip\_fqdn) | The Fully Qualified Domain Name (FQDN) of the firewall public IP. |
 | <a name="output_firewall_management_public_ip_id"></a> [firewall\_management\_public\_ip\_id](#output\_firewall\_management\_public\_ip\_id) | The ID of the firewall public IP. |
+| <a name="output_firewall_management_subnet_id"></a> [firewall\_management\_subnet\_id](#output\_firewall\_management\_subnet\_id) | The ID of the management firewall subnet. |
 | <a name="output_firewall_name"></a> [firewall\_name](#output\_firewall\_name) | The name of the firewall. |
 | <a name="output_firewall_subnet_id"></a> [firewall\_subnet\_id](#output\_firewall\_subnet\_id) | The ID of the firewall subnet. |
 | <a name="output_firewall_virtual_hub_configuration"></a> [firewall\_virtual\_hub\_configuration](#output\_firewall\_virtual\_hub\_configuration) | The virtual hub configuration of the firewall. |
