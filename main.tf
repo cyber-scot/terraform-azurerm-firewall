@@ -7,7 +7,7 @@ resource "azurerm_subnet" "firewall_subnet" {
 }
 
 resource "azurerm_public_ip" "firewall_pip" {
-  count               = var.create_firewall_public_ip == true ? 1 : 0
+  count = var.create_firewall_public_ip == true ? 1 : 0
 
   name                = var.pip_name != null ? var.pip_name : "pip-${var.name}"
   location            = var.location
