@@ -31,17 +31,17 @@ resource "azurerm_firewall" "firewall" {
   resource_group_name = each.value.rg_name
   sku_name            = each.value.firewall_sku
   sku_tier            = title(each.value.firewall_sku_tier)
-  firewall_policy_id = each.value.firewall_policy_id
-  dns_servers       = toset(each.value.firewall_dns_servers)
-  private_ip_ranges = each.value.firewall_snat_addresses
-  threat_intel_mode = title(each.value.firewall_threat_intel_mode)
-  zones             = toset(each.value.firewall_availability_zones)
+  firewall_policy_id  = each.value.firewall_policy_id
+  dns_servers         = toset(each.value.firewall_dns_servers)
+  private_ip_ranges   = each.value.firewall_snat_addresses
+  threat_intel_mode   = title(each.value.firewall_threat_intel_mode)
+  zones               = toset(each.value.firewall_availability_zones)
 
   dynamic "ip_configuration" {
     for_each = each.value.ip_configuration != null ? [each.value.ip_configuration] : []
     content {
-      name = ip_configuration.value.name != null ? ip_configuration.value.name : "ipconfig-${each.value.name}"
-      subnet_id = ip_configuration.value.subnet_id != null ? ip_configuration.value.subnet_id : azurerm_subnet.firewall_subnet[each.key].id
+      name                 = ip_configuration.value.name != null ? ip_configuration.value.name : "ipconfig-${each.value.name}"
+      subnet_id            = ip_configuration.value.subnet_id != null ? ip_configuration.value.subnet_id : azurerm_subnet.firewall_subnet[each.key].id
       public_ip_address_id = ip_configuration.value.public_ip_address_id != null ? ip_configuration.value.public_ip_address_id : azurerm_public_ip.firewall_pip[each.key].id
     }
   }
@@ -49,8 +49,8 @@ resource "azurerm_firewall" "firewall" {
   dynamic "management_ip_configuration" {
     for_each = each.value.management_ip_configuration != null ? [each.value.management_ip_configuration] : []
     content {
-        name = management_ip_configuration.value.name != null ? management_ip_configuration.value.name : "ipconfig-${each.value.name}"
-      subnet_id = management_ip_configuration.value.subnet_id != null ? management_ip_configuration.value.subnet_id : azurerm_subnet.firewall_subnet[each.key].id
+      name                 = management_ip_configuration.value.name != null ? management_ip_configuration.value.name : "ipconfig-${each.value.name}"
+      subnet_id            = management_ip_configuration.value.subnet_id != null ? management_ip_configuration.value.subnet_id : azurerm_subnet.firewall_subnet[each.key].id
       public_ip_address_id = management_ip_configuration.value.public_ip_address_id != null ? management_ip_configuration.value.public_ip_address_id : azurerm_public_ip.firewall_pip[each.key].id
     }
   }
@@ -58,7 +58,7 @@ resource "azurerm_firewall" "firewall" {
   dynamic "virtual_hub" {
     for_each = each.value.virtual_hub != null ? [each.value.virtual_hub] : []
     content {
-      virtual_hub_id = virtual_hub.value.virtual_hub_id
+      virtual_hub_id  = virtual_hub.value.virtual_hub_id
       public_ip_count = virtual_hub.value.public_ip_count
     }
   }
@@ -94,4 +94,17 @@ No modules.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_firewall_id"></a> [firewall\_id](#output\_firewall\_id) | The ID of the Azure Firewall. |
+| <a name="output_firewall_ip_configuration"></a> [firewall\_ip\_configuration](#output\_firewall\_ip\_configuration) | The IP configuration of the Azure Firewall. |
+| <a name="output_firewall_name"></a> [firewall\_name](#output\_firewall\_name) | The name of the Azure Firewall. |
+| <a name="output_firewall_policy_id"></a> [firewall\_policy\_id](#output\_firewall\_policy\_id) | The ID of the Firewall Policy associated with the Azure Firewall. |
+| <a name="output_firewall_public_ips"></a> [firewall\_public\_ips](#output\_firewall\_public\_ips) | The list of public IP addresses associated with the Azure Firewall. |
+| <a name="output_firewall_sku_name"></a> [firewall\_sku\_name](#output\_firewall\_sku\_name) | The SKU name of the Azure Firewall. |
+| <a name="output_firewall_sku_tier"></a> [firewall\_sku\_tier](#output\_firewall\_sku\_tier) | The SKU tier of the Azure Firewall. |
+| <a name="output_firewall_virtual_hub"></a> [firewall\_virtual\_hub](#output\_firewall\_virtual\_hub) | The Virtual Hub configuration of the Azure Firewall. |
+| <a name="output_public_ip_id"></a> [public\_ip\_id](#output\_public\_ip\_id) | The ID of the Public IP. |
+| <a name="output_public_ip_name"></a> [public\_ip\_name](#output\_public\_ip\_name) | The name of the Public IP. |
+| <a name="output_subnet_id"></a> [subnet\_id](#output\_subnet\_id) | The ID of the Subnet. |
+| <a name="output_subnet_name"></a> [subnet\_name](#output\_subnet\_name) | The name of the Subnet. |
