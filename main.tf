@@ -1,6 +1,6 @@
 resource "azurerm_subnet" "firewall_subnet" {
   count                = var.create_firewall_subnet == true ? 1 : 0
-  name                 = var.firewall_subnet_name != null?  var.firewall_subnet_name : "AzureFirewallSubnet"
+  name                 = var.firewall_subnet_name != null ? var.firewall_subnet_name : "AzureFirewallSubnet"
   resource_group_name  = var.vnet_rg_name != null ? var.vnet_rg_name : var.rg_name
   virtual_network_name = var.vnet_name
   address_prefixes     = var.firewall_subnet_prefixes
@@ -8,7 +8,7 @@ resource "azurerm_subnet" "firewall_subnet" {
 
 resource "azurerm_subnet" "firewall_management_subnet" {
   count                = var.create_firewall_management_subnet == true ? 1 : 0
-  name                 = var.firewall_management_subnet_name != null?  var.firewall_management_subnet_name : "AzureFirewallManagementSubnet"
+  name                 = var.firewall_management_subnet_name != null ? var.firewall_management_subnet_name : "AzureFirewallManagementSubnet"
   resource_group_name  = var.vnet_rg_name != null ? var.vnet_rg_name : var.rg_name
   virtual_network_name = var.vnet_name
   address_prefixes     = var.firewall_management_subnet_prefixes
@@ -71,7 +71,7 @@ resource "azurerm_firewall" "firewall" {
     for_each = var.management_ip_configuration != null ? [var.management_ip_configuration] : []
     content {
       name                 = management_ip_configuration.value.name != null ? management_ip_configuration.value.name : "ipconfig-mgmt-${var.name}"
-      subnet_id            = management_ip_configuration.value.subnet_id != null ?  management_ip_configuration.value.subnet_id : azurerm_subnet.firewall_management_subnet[0].id
+      subnet_id            = management_ip_configuration.value.subnet_id != null ? management_ip_configuration.value.subnet_id : azurerm_subnet.firewall_management_subnet[0].id
       public_ip_address_id = management_ip_configuration.value.public_ip_address_id != null ? management_ip_configuration.value.public_ip_address_id : azurerm_public_ip.firewall_management_pip[0].id
     }
   }

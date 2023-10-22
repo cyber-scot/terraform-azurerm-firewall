@@ -1,22 +1,22 @@
-variable "create_firewall_management_public_ip" {
-  description = "Boolean flag to control whether a firewall public IP is created."
-  type        = bool
-  default     = true
-}
-
 variable "create_firewall_data_public_ip" {
   description = "Boolean flag to control whether a firewall public IP is created."
   type        = bool
   default     = true
 }
 
-variable "create_firewall_subnet" {
+variable "create_firewall_management_public_ip" {
+  description = "Boolean flag to control whether a firewall public IP is created."
+  type        = bool
+  default     = true
+}
+
+variable "create_firewall_management_subnet" {
   description = "Boolean flag to control whether a firewall subnet is created."
   type        = bool
   default     = false
 }
 
-variable "create_firewall_management_subnet" {
+variable "create_firewall_subnet" {
   description = "Boolean flag to control whether a firewall subnet is created."
   type        = bool
   default     = false
@@ -30,6 +30,18 @@ variable "firewall_availability_zones" {
 
 variable "firewall_dns_servers" {
   description = "The DNS servers for the firewall."
+  type        = set(string)
+  default     = null
+}
+
+variable "firewall_management_subnet_name" {
+  description = "The name of the firewall subnet."
+  type        = string
+  default     = "AzureFirewallManagementSubnet"
+}
+
+variable "firewall_management_subnet_prefixes" {
+  description = "The address prefixes for the firewall subnet."
   type        = set(string)
   default     = null
 }
@@ -64,19 +76,7 @@ variable "firewall_subnet_name" {
   default     = "AzureFirewallSubnet"
 }
 
-variable "firewall_management_subnet_name" {
-  description = "The name of the firewall subnet."
-  type        = string
-  default     = "AzureFirewallManagementSubnet"
-}
-
 variable "firewall_subnet_prefixes" {
-  description = "The address prefixes for the firewall subnet."
-  type        = set(string)
-  default     = null
-}
-
-variable "firewall_management_subnet_prefixes" {
   description = "The address prefixes for the firewall subnet."
   type        = set(string)
   default     = null
